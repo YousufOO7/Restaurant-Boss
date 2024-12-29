@@ -1,8 +1,9 @@
+import Banner from "../HomePage/Banner/Banner";
 
 const Home = () => {
     return (
         <div>
-            this is home page
+            <Banner></Banner>
         </div>
     );
 };
