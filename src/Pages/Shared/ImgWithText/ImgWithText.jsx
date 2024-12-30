@@ -12,7 +12,7 @@ const ImgWithText = ({ coverImg, title }) => {
             <div className="my-10">
                 <div
                     className="hero bg-cover h-[400px]">
-                    <div className="hero-content text-center bg-slate-100 bg-opacity-85 px-5 py-8 text-black">
+                    <div className="hero-content text-center bg-[#15151599] bg-opacity-60 text-white px-5 py-8">
                         <div className="max-w-2xl">
                             <h1 className="mb-5 text-4xl font-semibold uppercase">{title}</h1>
                             <p className="mb-5">

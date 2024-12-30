@@ -5,11 +5,12 @@ const Navbar = () => {
     const Links = <>
     <li><NavLink to='/'>Home</NavLink></li>
     <li><NavLink to='/menu'>Our Menu</NavLink></li>
+    <li><NavLink to='/order'>Order Food</NavLink></li>
     </>
 
     return (
         <div>
-            <div className="navbar bg-black bg-opacity-20 text-white fixed z-10">
+            <div className="navbar bg-[#15151599] bg-opacity-60 text-white fixed z-10">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
