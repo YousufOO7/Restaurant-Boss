@@ -4,6 +4,7 @@ import Category from "../HomePage/Category/Category";
 import ChefRecommends from "../HomePage/ChefRecommends/ChefRecommends";
 import Featured from "../HomePage/Featured/Featured";
 import MainMenu from "../HomePage/MainMenu/MainMenu";
+import Testimonials from "../HomePage/Testimonials/Testimonials";
 
 const Home = () => {
     return (
@@ -16,6 +17,7 @@ const Home = () => {
                 <ChefRecommends></ChefRecommends>
             </div>
             <Featured></Featured>
+            <Testimonials></Testimonials>
         </div>
     );
 };
