@@ -5,10 +5,14 @@ import ChefRecommends from "../HomePage/ChefRecommends/ChefRecommends";
 import Featured from "../HomePage/Featured/Featured";
 import MainMenu from "../HomePage/MainMenu/MainMenu";
 import Testimonials from "../HomePage/Testimonials/Testimonials";
+import { Helmet } from 'react-helmet-async';
 
 const Home = () => {
     return (
         <div>
+            <Helmet>
+                <title>Boss | Home</title>
+            </Helmet>
             <Banner></Banner>
             <div className="max-w-6xl mx-auto">
                 <Category></Category>
