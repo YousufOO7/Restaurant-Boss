@@ -2,6 +2,7 @@ import Banner from "../HomePage/Banner/Banner";
 import BgBistro from "../HomePage/Category/BgBistro";
 import Category from "../HomePage/Category/Category";
 import ChefRecommends from "../HomePage/ChefRecommends/ChefRecommends";
+import Featured from "../HomePage/Featured/Featured";
 import MainMenu from "../HomePage/MainMenu/MainMenu";
 
 const Home = () => {
@@ -14,6 +15,7 @@ const Home = () => {
                 <MainMenu></MainMenu>
                 <ChefRecommends></ChefRecommends>
             </div>
+            <Featured></Featured>
         </div>
     );
 };
