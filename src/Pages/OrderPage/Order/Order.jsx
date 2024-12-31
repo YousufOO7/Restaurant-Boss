@@ -1,26 +1,35 @@
 import { useState } from 'react';
-import orderIng from '../../../assets/shop/banner2.jpg'
+import orderIng from '../../../assets/shop/banner2.jpg';
 import ImgWithText from '../../Shared/ImgWithText/ImgWithText';
 
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import useMenu from '../../../Hooks/useMenu';
-import FoodCard from '../FoodCard/FoodCard';
 import OrderTab from '../OrderTab/OrderTab';
+import { Helmet } from 'react-helmet-async';
+import { useParams } from 'react-router-dom';
 
 const Order = () => {
-    const [tabIndex, setLabIndex] = useState(0);
-    const [menu] = useMenu();
-    const desserts = menu.filter(items => items.category === 'dessert')
-    const soup = menu.filter(items => items.category === 'soup')
-    const salad = menu.filter(items => items.category === 'salad')
-    const pizza = menu.filter(items => items.category === 'pizza')
-    const drinks = menu.filter(items => items.category === 'drinks')
+    const categories = ['salad', 'pizza', 'soup', 'dessert', 'drinks']
+    const {category} = useParams()
+    const initialIndex = categories.indexOf(category)
+    const [tabIndex, setLabIndex] = useState(initialIndex);
+    const [menu = []] = useMenu();
+
+    const desserts = Array.isArray(menu) ? menu.filter(item => item.category === 'dessert') : [];
+    const soup = Array.isArray(menu) ? menu.filter(item => item.category === 'soup') : [];
+    const salad = Array.isArray(menu) ? menu.filter(item => item.category === 'salad') : [];
+    const pizza = Array.isArray(menu) ? menu.filter(item => item.category === 'pizza') : [];
+    const drinks = Array.isArray(menu) ? menu.filter(item => item.category === 'drinks') : [];
+
     return (
         <div>
-            <ImgWithText coverImg={orderIng} title={"Oder now"}></ImgWithText>
+            <Helmet>
+                <title>Boss | Order Food</title>
+            </Helmet>
+            <ImgWithText coverImg={orderIng} title={"Order now"}></ImgWithText>
 
-            <div className='my-10 flex justify-center max-w-6xl mx-auto'>
+            <div className="my-10 flex justify-center max-w-6xl mx-auto">
                 <Tabs defaultIndex={tabIndex} onSelect={(index) => setLabIndex(index)}>
                     <TabList>
                         <Tab>SALAD</Tab>

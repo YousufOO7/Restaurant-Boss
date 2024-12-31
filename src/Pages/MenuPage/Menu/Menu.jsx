@@ -10,6 +10,7 @@ import dessertImg from '../../../assets/menu/dessert-bg.jpeg'
 import pizzaImg from '../../../assets/menu/pizza-bg.jpg'
 import saladImg from '../../../assets/menu/salad-bg.jpg'
 import soupImg from '../../../assets/menu/soup-bg.jpg'
+import { Helmet } from "react-helmet-async";
 
 const Menu = () => {
     const [menu] = useMenu();
@@ -20,25 +21,25 @@ const Menu = () => {
     const offered = menu.filter(items => items.category === 'offered')
     return (
         <div>
+            <Helmet>
+                <title>Boss | Menu</title>
+            </Helmet>
+
             <Cover img={menuIgm} title={"Our menu"}></Cover>
             <SharedTitle subHeading={"Don't Miss"} heading={"Today's offer"}></SharedTitle>
 
             <MenuCategory items={offered}></MenuCategory>
             {/* dessert category */}
-            <ImgWithText coverImg={dessertImg} title={"dessert"}></ImgWithText>
-            <MenuCategory items={desserts}></MenuCategory>
+            <ImgWithText items={desserts} coverImg={dessertImg} title={"dessert"}></ImgWithText>
 
             {/* pizza category */}
-            <ImgWithText coverImg={pizzaImg} title={"pizza"}></ImgWithText>
-            <MenuCategory items={pizza}></MenuCategory>
+            <ImgWithText items={pizza} coverImg={pizzaImg} title={"pizza"}></ImgWithText>
 
             {/* salad category */}
-            <ImgWithText coverImg={saladImg} title={"salad"}></ImgWithText>
-            <MenuCategory items={salad}></MenuCategory>
+            <ImgWithText items={salad} coverImg={saladImg} title={"salad"}></ImgWithText>
 
             {/* soup category */}
-            <ImgWithText coverImg={soupImg} title={"Soup"}></ImgWithText>
-            <MenuCategory items={soup}></MenuCategory>
+            <ImgWithText items={soup} coverImg={soupImg} title={"soup"}></ImgWithText>
         </div>
     );
 };
