@@ -1,11 +1,16 @@
-import { NavLink } from "react-router-dom";
+import { useContext } from "react";
+import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../../../Provider/AuthProvider";
 
 const Navbar = () => {
+    const { user, logOut } = useContext(AuthContext);
 
     const Links = <>
-    <li><NavLink to='/'>Home</NavLink></li>
-    <li><NavLink to='/menu'>Our Menu</NavLink></li>
-    <li><NavLink to='/order/salad'>Order Food</NavLink></li>
+        <li><NavLink to='/'>Home</NavLink></li>
+        <li><NavLink to='/menu'>Our Menu</NavLink></li>
+        <li><NavLink to='/order/salad'>Order Food</NavLink></li>
+        <li><NavLink to='/secret'>Secret</NavLink></li>
+
     </>
 
     return (
@@ -45,7 +50,17 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <a className="btn">Button</a>
+                    {
+                        user && user?.email ? <div className='flex items-center gap-2'>
+                            <p className='hidden md:block '>{user?.displayName}</p>
+                            <img referrerPolicy='no-referrer' className='h-[40px] rounded-full mr-2' src={user?.photoURL} alt="image" />
+                        </div> : ''
+                    }
+                    {
+                        user && user?.email ?
+                            <Link to='/'><button onClick={logOut} className="btn btn-error text-white">Log-Out</button></Link>
+                            : <Link to='/login'><button className="btn bg-[#15151599] text-white">Log-In</button></Link>
+                    }
                 </div>
             </div>
         </div>
