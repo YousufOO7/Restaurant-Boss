@@ -1,21 +1,31 @@
 import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../../Provider/AuthProvider";
+import { FaShoppingCart } from "react-icons/fa";
+import useCart from "../../../Hooks/useCart";
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
+    const [cart] = useCart();
 
     const Links = <>
         <li><NavLink to='/'>Home</NavLink></li>
         <li><NavLink to='/menu'>Our Menu</NavLink></li>
         <li><NavLink to='/order/salad'>Order Food</NavLink></li>
         <li><NavLink to='/secret'>Secret</NavLink></li>
-
+        <li className="items-center">
+            <Link to="/dashboard/cart">
+                <button className="btn bg-transparent btn-sm border">
+                    <FaShoppingCart className="mr-4 text-white"></FaShoppingCart>
+                    <div className="badge badge-secondary">+{cart.length}</div>
+                </button>
+            </Link>
+        </li>
     </>
 
     return (
         <div>
-            <div className="navbar bg-[#15151599] bg-opacity-60 text-white fixed z-10">
+            <div className="navbar bg-[#15151599] px-10 bg-opacity-60 text-white fixed z-10">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -34,7 +44,7 @@ const Navbar = () => {
                         </div>
                         <ul
                             tabIndex={0}
-                            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow items-center">
                             {
                                 Links
                             }
@@ -43,7 +53,7 @@ const Navbar = () => {
                     <a className="btn btn-ghost text-xl">Restaurant Boss</a>
                 </div>
                 <div className="navbar-center hidden lg:flex">
-                    <ul className="menu menu-horizontal px-1">
+                    <ul className="menu menu-horizontal px-1 items-center">
                         {
                             Links
                         }
