@@ -4,6 +4,7 @@ import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-s
 import { AuthContext } from '../../Provider/AuthProvider';
 import Swal from 'sweetalert2'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import SocialLogin from '../SocialLogin/SocialLogin';
 
 const Login = () => {
     const [disabled, setDisabled] = useState(true);
@@ -61,6 +62,7 @@ const Login = () => {
                     <div className="card bg-gray-100 w-full max-w-sm">
                         <form onSubmit={handleLogin} className="card-body">
                             <h2 className="text-3xl font-bold text-center">Login</h2>
+                            <SocialLogin></SocialLogin>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Email</span>

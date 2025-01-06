@@ -3,8 +3,10 @@ import signUpImg from '../../assets/others/authentication2.png'
 import { useForm } from 'react-hook-form';
 import { useContext, useState } from 'react';
 import { AuthContext } from '../../Provider/AuthProvider';
-import { FaEyeSlash, FaEye  } from "react-icons/fa";
+import { FaEyeSlash, FaEye } from "react-icons/fa";
 import Swal from 'sweetalert2';
+import useAxiosPublic from '../../Hooks/useAxiosPublic';
+import SocialLogin from '../SocialLogin/SocialLogin';
 
 
 const SignUp = () => {
@@ -12,6 +14,7 @@ const SignUp = () => {
     const { createNewUser, updateUserProfile } = useContext(AuthContext);
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
+    const axiosPublic = useAxiosPublic();
 
     const onSubmit = data => {
         console.log(data);
@@ -19,15 +22,26 @@ const SignUp = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user);
-                updateUserProfile({ displayName: data.name, photoURL: data.photoURL })
-                Swal.fire({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: 'User created successfully.',
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-                navigate("/")
+                updateUserProfile({ displayName: data.name, photoURL: data.photoURL });
+                // send user data to database
+                const userInfo = {
+                    name: data.name,
+                    email: data.email
+                }
+                axiosPublic.post('/users', userInfo)
+                    .then(res => {
+                        if (res.data.insertedId) {
+                            Swal.fire({
+                                position: 'center',
+                                icon: 'success',
+                                title: 'User created successfully.',
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                            navigate("/")
+                        }
+                    })
+
             })
     }
 
@@ -41,6 +55,7 @@ const SignUp = () => {
                     <div className="card bg-gray-100 w-full max-w-sm">
                         <form onSubmit={handleSubmit(onSubmit)} className="card-body">
                             <h2 className="text-3xl font-bold text-center">SignUp</h2>
+                            <SocialLogin></SocialLogin>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Name</span>
@@ -52,7 +67,7 @@ const SignUp = () => {
                                 <label className="label">
                                     <span className="label-text">Photo URL</span>
                                 </label>
-                                <input type="text" {...register('photoURL', { required: true })}  placeholder="photo URL" className="input input-bordered" required />
+                                <input type="text" {...register('photoURL', { required: true })} placeholder="photo URL" className="input input-bordered" required />
                                 {errors.photoURL && <span className="text-red-600">Photo URL is required</span>}
                             </div>
                             <div className="form-control">
