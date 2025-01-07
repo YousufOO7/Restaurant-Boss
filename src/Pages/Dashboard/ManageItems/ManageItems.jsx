@@ -3,6 +3,7 @@ import useMenu from "../../../Hooks/useMenu";
 import SharedTitle from "../../Shared/SharedTitle/SharedTitle";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import { Link } from "react-router-dom";
 
 
 const ManageItems = () => {
@@ -10,7 +11,6 @@ const ManageItems = () => {
     const axiosSecure = useAxiosSecure();
 
     const handleDeleteItem = (item) => {
-        console.log(item._id)
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -36,11 +36,6 @@ const ManageItems = () => {
 
             }
         });
-    }
-
-
-    const handleUpdateItem = item => {
-        console.log(item);
     }
 
     return (
@@ -84,12 +79,13 @@ const ManageItems = () => {
                                 </td>
 
                                 <td>
-                                    <button
-                                        onClick={() => handleUpdateItem(item)}
-                                        className="btn bg-[#D1A054B3]"
-                                    >
-                                        <FaEdit className="text-white text-xl"></FaEdit>
-                                    </button>
+                                    <Link to={`/dashboard/updateItem/${item._id}`}>
+                                        <button
+                                            className="btn bg-[#D1A054B3]"
+                                        >
+                                            <FaEdit className="text-white text-xl"></FaEdit>
+                                        </button>
+                                    </Link>
                                 </td>
                                 <td>
                                     <button
