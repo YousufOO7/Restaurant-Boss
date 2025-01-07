@@ -22,7 +22,6 @@ const SocialLogin = () => {
                 console.log(userInfo);
                 axiosPublic.post('/users', userInfo)
                     .then(res => {
-                        navigate(location?.state ? location?.state : '/')
                         Swal.fire({
                             position: 'center',
                             icon: 'success',
@@ -30,6 +29,7 @@ const SocialLogin = () => {
                             showConfirmButton: false,
                             timer: 1500
                         });
+                        navigate(location?.state ? location?.state : '/')
                     })
                     .catch(error => {
                         Swal.fire({
