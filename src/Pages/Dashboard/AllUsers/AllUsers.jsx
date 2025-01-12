@@ -51,9 +51,9 @@ const AllUsers = () => {
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes, Make it!"
-        }).then((result) => {
+        }).then( (result) => {
             if (result.isConfirmed) {
-                axiosSecure.patch(`/users/admin/${user._id}`)
+                axiosSecure.patch(`/users/admin/${user?._id}`)
                     .then(res => {
                         if (res.data.modifiedCount > 0) {
                             Swal.fire({
